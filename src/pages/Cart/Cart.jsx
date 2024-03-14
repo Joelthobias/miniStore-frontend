@@ -49,7 +49,11 @@ const Cart = () => {
             </div>
           ))}
       </div>
+      <div className="cart_action">
 
+            <button className='btn btn-outline-dark '>Continue Shopping</button>
+            <button className='btn-new btn-green f-r'>Checkout</button>
+      </div>
     </div>
   );
 };

@@ -4,8 +4,9 @@ import {
   Route
 } from "react-router-dom";
 import Home from './Home';
-import NavBar from './NavBar';
-import Cart from "./Cart";
+import NavBar from './Components/Navbar/NavBar';
+import Cart from "./pages/Cart/Cart";
+import AdminDash from "./pages/admin-Dash";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/Admin" element={<AdminDash />}></Route>
       </Routes>
     </div>
 
