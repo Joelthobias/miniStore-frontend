@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+the mini-store ecommerce webiste for studnets to buy basic utlits .
+the store is designed in a way that students can order the utlits from site and pay and collect them form staff room in the next day.So that they can avoid waiting for records and such for days without knowing the availability of the .All they have to do is check the website for purcahse and availability.
+The teachers can recive information about students realted the purcahse of lab records .
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+###the structure.
 
-In the project directory, you can run:
+there is user and admin and observers.
+the users [Students] have access to home,product page,cart,checkout,orders,signup,login,profile pages
+the Admin have acess to Dashboard,order list,add product,edit prodcuts,delete products,product count update
+the observers [staff] have the acess to the order list and mark them payment recived and devliverd
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+user [Students] - name,email,prno,mobile,semester,department,password
+user [Students] login with mobile and passowrd.
+siginup with name,prno,mobile,passowrd .
+user [Students] neeeds to verify their mobile number by entering otp they recived by sms.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Home page - products will be listed with image.title,description,price and add to cart button
+when clicking the add to cart button that item will added to cart and the counter near the cart icon in navbar will be updated
 
-### `npm test`
+Cart - products added to cart will be displayed with image,title,quantity,price per unit,total per product and grand total.
+there will be continue shopping and checkout buttons with functions as their name suggests
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Checkout - the user info and  order info will be dispalyed with grand total and there will be a complete checkout and cancel button.
+after complete checkout is clicked a message will be showed completion of order and a sms will be sended to the registed mobile number
 
-### `npm run build`
+Orders -order history will be displayed with the following info : orderid,date,total,semster
+when the order div is clicked the detailed info will shown with a collapse .
+the detailed info will contain order id ,date purchased,semster purchased,status[deliverd,cancelled],prodcut info[title,quantity,price per one,total for a product] and sub total
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+profile - the user info will be displayed and last 5 orders will be shown
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Observers - they are the person in charge of each clasess of each semsters and departments.
+they can see the order info and mark the order status as deliverd or cancelled.
+they can sort the order by time, stdudent,semster
+this enables the class in charge to know that which students havent purchased the records and essnetial prdocuts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Observers have name,id,staff id,mobile,email,department,represnating semster/class
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Admin - admin can login with separted page/login with their mobile and password

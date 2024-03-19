@@ -1,47 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import './index.css'; // Import your CSS file
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const AdminDash = () => {
-  // const [cart, setCart] = useState({});
-  // const [productsData, setProductsData] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchCartData = async () => {
-  //     const cartUrl = `https://fakestoreapi.com/carts/5`;
-  //     try {
-  //       const response = await fetch(cartUrl);
-  //       const data = await response.json();
-  //       if (data.products) {
-  //         const productIds = data.products.map(product => product.productId);
-
-  //         const productDetailsPromises = productIds.map(productId => {
-  //           return fetch(`https://fakestoreapi.com/products/${productId}`)
-  //             .then(res => res.json());
-  //         });
-
-  //         const products = await Promise.all(productDetailsPromises);
-  //         setProductsData(products);
-  //       }
-
-  //       setCart(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //       throw error;
-  //     }
-  //   };
-
-  //   fetchCartData();
-  // }, []);
-
+const AdminDashboard = () => {
   return (
-    <div className="admin-panel">
-
-      <h3>Admin Dashboard</h3>
-      <button onClick={()=>window.location.href="/Admin/add_product"} className="add-product">ADD Product</button>
-      <button onClick={()=>window.location.href="/Admin/view_products"} className="view-products">View Products</button>
-      <button onClick={()=>window.location.href="/Admin/view-orders"} className="view-orders">View Orders</button>
+    <div className="container mt-5">
+      <div className="row">
+      <h1 className="mb-4">Admin Dashboard</h1>
+        <div className="col-6">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="col-6 list-group">
+            <Link to="/admin/products" className="list-group-item list-group-item-action">
+              Manage Products
+            </Link>
+            <Link to="/admin/orders" className="list-group-item list-group-item-action">
+              View Orders
+            </Link>
+            <Link to="/admin/add-product" className="list-group-item list-group-item-action">
+              Add Product
+            </Link>
+            <Link to="/admin/edit-product" className="list-group-item list-group-item-action">
+              Edit Product
+            </Link>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default AdminDash;
+export default AdminDashboard;
