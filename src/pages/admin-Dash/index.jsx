@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 const AdminDashboard = () => {
   return (
     <div className="container mt-5">
-      <div className="row">
+      <div className="row col-12">
       <h1 className="mb-4">Admin Dashboard</h1>
-        <div className="col-6">
+        <div className="ms-2 mt-5 col-6">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Product ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -22,23 +23,14 @@ const AdminDashboard = () => {
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+                <td><i class="fa-solid fa-pen-to-square"></i></td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+             
             </tbody>
           </table>
         </div>
-        <div className="col-6 list-group">
-            <Link to="/admin/products" className="list-group-item list-group-item-action">
+        <div className="col-3 ms-auto list-group">
+            <Link to="/admin/products" className="active list-group-item list-group-item-action">
               Manage Products
             </Link>
             <Link to="/admin/orders" className="list-group-item list-group-item-action">
