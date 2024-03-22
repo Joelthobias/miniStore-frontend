@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AddProduct = () => {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [id, setID] = useState('');
-    const [imgurl, setImgUrl] = useState('');
-    
-    const submitHandler = (e) => {
+    const [image, setImage] = useState('');
 
+    const submitHandler = async (e) => {
         e.preventDefault();
-        console.log('Title:', title);
-        console.log('Price:', price);
-        console.log('ID:', id);
-        console.log('Image URL:', imgurl);
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('price', price);
+        formData.append('productID', id);
+        formData.append('image', image);
+
+        try {
+            const response = await axios.post('http://localhost:4040/add-product', formData);
+            console.log('Server response:', response.data);
+            // Redirect to /admin after successful submission
+            window.location.href='/admin'
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
@@ -32,8 +42,8 @@ const AddProduct = () => {
                     <input type="text" className="form-control" value={id} id="productID" onChange={(e) => setID(e.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="ImageUrl" className="form-label">Product Image</label>
-                    <input type="text" className="form-control" value={imgurl} id="ImageUrl" onChange={(e) => setImgUrl(e.target.value)} />
+                    <label htmlFor="image" className="form-label">Product Image</label>
+                    <input type="file" className="form-control" id="image" onChange={(e) => setImage(e.target.files[0])} />
                 </div>
 
                 <button onClick={submitHandler} type="submit" className="ms-auto btn btn-primary">ADD</button>
