@@ -25,7 +25,9 @@ const Signup = () => {
         try {
             const response = await axios.post('http://localhost:4040/signup', formData);
             console.log('Signup successful:', response.data);
-            localStorage.setItem('user', response.data.user);
+
+            localStorage.setItem('user', response.data.user.name);
+            localStorage.setItem('userID', response.data.user._id);
 
             window.location.href='/'
             // Redirect the user to the dashboard or homepage

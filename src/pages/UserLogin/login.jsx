@@ -24,6 +24,7 @@ const Login = () => {
             console.log('Login successful:', response.data.user);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', response.data.user.name);
+            localStorage.setItem('userID', response.data.user._id);
             window.location.href = '/'
 
             // Redirect the user to the dashboard or homepage
