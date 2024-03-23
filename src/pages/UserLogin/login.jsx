@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        mobileNumber: '',
+        mobile: '',
         password: ''
     });
     const [error, setError] = useState('');
@@ -21,8 +21,13 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:4040/login', formData);
-            console.log('Login successful:', response.data);
+            console.log('Login successful:', response.data.user);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', response.data.user.name);
+            window.location.href = '/'
+
             // Redirect the user to the dashboard or homepage
+            
         } catch (error) {
             console.error('Login error:', error.response.data);
             setError(error.response.data.error);
@@ -37,8 +42,8 @@ const Login = () => {
                     {error && <div className="alert alert-danger">{error}</div>}
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="mobileNumber" className="form-label">Mobile Number</label>
-                            <input type="tel" className="form-control" id="mobileNumber" name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} placeholder="Enter mobile number" required />
+                            <label htmlFor="mobile" className="form-label">Mobile</label>
+                            <input type="tel" className="form-control" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Enter mobile number" required />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>

@@ -1,16 +1,30 @@
-import React from 'react'
+import React from 'react';
 import './navbar.css';
+
 const NavBar = () => {
+  // Fetch user data from local storage
+  const user = localStorage.getItem('user');
+
   return (
     <nav className='container my-5'>
       <h3><a href="/">Mini-Store</a></h3>
       <div className="nav-items">
-
-        <button className='btn btn-dark'>Logout</button>
-        <i onClick={()=>window.location.href="/cart"} className="fa-solid fa-cart-shopping ms-5"></i>
+        {/* Render user name and logout button */}
+        {user && (
+          <div className="user-info">
+            <span className="user-name">Welcome, {user}</span> <br />
+            <button className='btn btn-dark'>Logout</button>
+          </div>
+        )}
+        {/* If user doesn't exist, render login button */}
+        {!user && (
+          <button onClick={() => window.location.href = '/login'} className='btn btn-dark'>Login</button>
+        )}
+        {/* Cart icon */}
+        <i onClick={() => window.location.href = "/cart"} className="fa-solid fa-cart-shopping ms-5"></i>
       </div>
     </nav>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

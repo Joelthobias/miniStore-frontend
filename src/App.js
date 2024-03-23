@@ -12,6 +12,7 @@ import AddProduct from "./pages/add-product";
 import EditProduct from "./pages/editProduct/editProduct";
 import NavAdmin from "./Components/NavbarAdmin/NavAdmin";
 import Login from './pages/UserLogin/login';
+import Signup from './pages/signup/userSignup';
 
 function App() {
   const isAdminRoute = window.location.pathname.startsWith('/admin');
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/admin" element={<AdminDash />} />
           <Route path="/admin/add-product" element={<AddProduct />} />
