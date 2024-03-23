@@ -16,7 +16,7 @@ const AddProduct = () => {
         formData.append('image', image);
 
         try {
-            const response = await axios.post('http://localhost:4040/add-product', formData);
+            const response = await axios.post('http://localhost:4040/admin/add-product', formData);
             console.log('Server response:', response.data);
             // Redirect to /admin after successful submission
             window.location.href='/admin'

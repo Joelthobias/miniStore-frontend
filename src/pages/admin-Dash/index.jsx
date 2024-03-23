@@ -8,7 +8,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4040');
+        const response = await axios.get('http://localhost:4040/admin');
         console.log(response.data);
         setProducts(response.data.products); // Assuming the response data has a 'products' key containing an array of products
       } catch (error) {
@@ -19,11 +19,14 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
+  const handleEditProduct = (id) => {
+    // Redirect to the edit product page with the product ID in the URL
+    window.location.href = `/admin/editProduct/${id}`;
+  };
 
   return (
     <div className="container mt-5">
       <div className="row col-12">
-        <h1 className="mb-4">Admin Dashboard</h1>
         <div className="ms-2 mt-5 col-6">
           <table className="table table-striped table-hover">
             <thead>
@@ -31,18 +34,20 @@ const AdminDashboard = () => {
                 <th scope="col">Product ID</th>
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Image</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
               {products.map(product => (
-                <tr key={product.id}>
+                <tr key={product.productID}>
                   <td>{product.productID}</td>
                   <td>{product.title}</td>
                   <td>{product.price}</td>
+                  <td>{product.quantity}</td>
                   <td><img crossOrigin='anonymous' src={`http://localhost:4040${product.img}`} alt={product.title} style={{ width: '50px', height: '50px' }} /></td>
-                  <td><i className="fa-solid fa-pen-to-square"></i></td>
+                  <td><i className="fa-solid fa-pen-to-square" onClick={() => handleEditProduct(product.productID)}></i></td>
                 </tr>
               ))}
             </tbody>
