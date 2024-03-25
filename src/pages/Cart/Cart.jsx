@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css'; // Import your CSS file
+import axios from 'axios';
 
 const Cart = () => {
   const [cart, setCart] = useState({});
@@ -7,23 +8,31 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchCartData = async () => {
-      const cartUrl = `https://fakestoreapi.com/carts/5`;
       try {
-        const response = await fetch(cartUrl);
-        const data = await response.json();
-        if (data.products) {
-          const productIds = data.products.map(product => product.productId);
+        const userID = localStorage.getItem('userID');
 
-          const productDetailsPromises = productIds.map(productId => {
-            return fetch(`https://fakestoreapi.com/products/${productId}`)
-              .then(res => res.json());
-          });
+        const response = await axios.get(`http://localhost:4040/cart`, {
+          params: {
+            userId: userID
+          }
+        });
 
-          const products = await Promise.all(productDetailsPromises);
-          setProductsData(products);
+        if (response.data.carts.length === 0) {
+          setCart({});
+          setProductsData([]);
+          return;
         }
 
-        setCart(data);
+        setCart(response.data.carts[0]);
+
+        const productIds = response.data.carts[0].products.map(product => product.product);
+        const productDetailsPromises = productIds.map(productId => {
+          return axios.get(`http://localhost:4040/product/${productId}`)
+            .then(res => res.data); // Use res.data instead of res.json()
+        });
+
+        const products = await Promise.all(productDetailsPromises);
+        setProductsData(products);
       } catch (error) {
         console.error(error);
         throw error;
@@ -33,26 +42,55 @@ const Cart = () => {
     fetchCartData();
   }, []);
 
+  const handleCheckout = async () => {
+    try {
+      const userID = localStorage.getItem('userID');
+      await axios.post(`http://localhost:4040/create-order`, { userId: userID });
+      alert('Order completed successfully!');
+      // Optionally, you can redirect the user to a confirmation page or clear the cart state
+    } catch (error) {
+      console.error('Error completing order:', error);
+      alert('Failed to complete order. Please try again later.');
+    }
+  };
+
   return (
-    <div className="cart-container">
-      <div className="cart-div">
-        
-          {productsData.map(product => (
-            <div className="cart-product">
-              <img src={product.image} alt={product.title} />
-              <div className="cart-body">
-                <h3 className="cart-title">
-                  {product.title}
-                </h3>
-                <h5>{product.price} &#36;</h5>
+    <div className="container mt-5">
+      <div className="row col-12">
+        <div className="col-md-8">
+          {productsData.length > 0 ? (
+            <div className="card">
+              <div className="card-body">
+                {productsData.map(product => (
+                  <div className="row " key={product.product.productID}>
+                    <div className="col-md-3">
+                      <img crossOrigin='anonymus' src={`http://localhost:4040${product.product.img}`} alt={product.product.title} className="img-fluid p-2" style={{ height: '5rem' }} />
+                    </div>
+                    <div className="col-md-9">
+                      <h5 className="card-title">{product.product.title}</h5>
+                      <p className="card-text">Price: {product.product.price} &#36;</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-      </div>
-      <div className="cart_action">
-
-            <button className='btn btn-outline-dark '>Continue Shopping</button>
-            <button className='btn-new btn-green f-r'>Checkout</button>
+          ) : (
+            <p>No products in cart</p>
+          )}
+        </div>
+        <div className="col-md-4">
+          {cart && (
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Cart Summary</h5>
+                <p>Total Quantity: {cart.totalQuantity}</p>
+                <p>Total Price: {cart.totalPrice} &#36;</p>
+                <button className="btn btn-outline-dark" onClick={handleCheckout}>Continue Shopping</button>
+                <button className="btn btn-success mt-2" onClick={handleCheckout}>Checkout</button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
