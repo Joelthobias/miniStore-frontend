@@ -30,19 +30,20 @@ const Order = () => {
             {orders && orders.length > 0 ? (
                 orders.map(order => (
                     <div className="container mt-4" key={order._id}>
-                        <div className="col-12">
+                        <div className="col-12" 
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#orderCollapse${order._id}`}
+                            aria-expanded="false"
+                            aria-controls={`orderCollapse${order._id}`}>
                             <button
-                                className="btn btn-link"
+                                className="col-4 border border-dark btn btn-link"
                                 type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target={`#orderCollapse${order._id}`}
-                                aria-expanded="false"
-                                aria-controls={`orderCollapse${order._id}`}
+
                             >
                                 Order ID: {order._id}
                             </button>
                         </div>
-                        <div className="collapse" id={`orderCollapse${order._id}`}>
+                        <div className="collapse mt-3 col-8" id={`orderCollapse${order._id}`}>
                             <table className="table table-bordered">
                                 <thead>
                                     <tr>
@@ -68,7 +69,7 @@ const Order = () => {
                                 <p>Total Price: {order.totalPrice}</p>
                                 <p>Status: {order.status}</p>
                                 <p>User ID: {order.user}</p>
-                                <p>Created At: {new Date(order.createdAt).toLocaleString()}</p>
+                                <p>Orderd At: {new Date(order.createdAt).toLocaleString()}</p>
                             </div>
                         </div>
                     </div>
