@@ -13,7 +13,7 @@ const NavBar = () => {
         {user && (
           <div className="user-info">
             <span className="user-name">Welcome, {user}</span> <br />
-            <button className='btn btn-dark'>Logout</button>
+            <button onClick={()=>{window.location.href='/orders'}}  className='btn btn-dark'>Orders</button>
           </div>
         )}
         {/* If user doesn't exist, render login button */}

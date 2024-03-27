@@ -13,6 +13,7 @@ import EditProduct from "./pages/editProduct/editProduct";
 import NavAdmin from "./Components/NavbarAdmin/NavAdmin";
 import Login from './pages/UserLogin/login';
 import Signup from './pages/signup/userSignup';
+import Order from './pages/orders/order';
 
 function App() {
   const isAdminRoute = window.location.pathname.startsWith('/admin');
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Order />} />
           <Route path="/admin" element={<AdminDash />} />
           <Route path="/admin/add-product" element={<AddProduct />} />
           <Route path="/admin/editProduct/:productID" element={<EditProduct />} />

@@ -16,23 +16,17 @@ const Cart = () => {
             userId: userID
           }
         });
-
-        if (response.data.carts.length === 0) {
+        let carts = response.data.carts
+        if (!carts) {
           setCart({});
           setProductsData([]);
           return;
         }
+          setCart(response.data.carts);
+          setProductsData(response.data.carts.products);
+        
 
-        setCart(response.data.carts[0]);
-
-        const productIds = response.data.carts[0].products.map(product => product.product);
-        const productDetailsPromises = productIds.map(productId => {
-          return axios.get(`http://localhost:4040/product/${productId}`)
-            .then(res => res.data); // Use res.data instead of res.json()
-        });
-
-        const products = await Promise.all(productDetailsPromises);
-        setProductsData(products);
+        console.log(cart);
       } catch (error) {
         console.error(error);
         throw error;
@@ -47,6 +41,7 @@ const Cart = () => {
       const userID = localStorage.getItem('userID');
       await axios.post(`http://localhost:4040/create-order`, { userId: userID });
       alert('Order completed successfully!');
+      window.location.href='/orders'
       // Optionally, you can redirect the user to a confirmation page or clear the cart state
     } catch (error) {
       console.error('Error completing order:', error);
@@ -59,21 +54,43 @@ const Cart = () => {
       <div className="row col-12">
         <div className="col-md-8">
           {productsData.length > 0 ? (
-            <div className="card">
-              <div className="card-body">
-                {productsData.map(product => (
-                  <div className="row " key={product.product.productID}>
-                    <div className="col-md-3">
-                      <img crossOrigin='anonymus' src={`http://localhost:4040${product.product.img}`} alt={product.product.title} className="img-fluid p-2" style={{ height: '5rem' }} />
-                    </div>
-                    <div className="col-md-9">
-                      <h5 className="card-title">{product.product.title}</h5>
-                      <p className="card-text">Price: {product.product.price} &#36;</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="card-body">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {productsData.map(pds => (
+                    <tr key={pds._id}>
+                      <td>
+                        {pds.product && pds.product.img && (
+                          <img crossOrigin="anonymous" src={`http://localhost:4040${pds.product.img}`} alt={pds.product.title} className="img-fluid p-2" style={{ height: '5rem' }} />
+                        )}
+                      </td>
+                      <td>
+                        {pds.product && pds.product.title && pds.product.title}
+                      </td>
+                      <td>
+                        {pds.product && pds.product.price && `$${pds.product.price}`}
+                      </td>
+                      <td>
+                        {pds.quantity}
+                      </td>
+                      <td>
+                        {pds.totalPrice}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+
           ) : (
             <p>No products in cart</p>
           )}
@@ -83,9 +100,9 @@ const Cart = () => {
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">Cart Summary</h5>
-                <p>Total Quantity: {cart.totalQuantity}</p>
-                <p>Total Price: {cart.totalPrice} &#36;</p>
-                <button className="btn btn-outline-dark" onClick={handleCheckout}>Continue Shopping</button>
+                <p className='ps-3 mt-3'>Total Quantity: {cart.totalQuantity}</p>
+                <p className='ps-3'>Total Price: {cart.totalPrice} &#36;</p>
+                <button className="btn btn-outline-dark" onClick={() => { window.location.href = "/" }}>Continue Shopping</button>
                 <button className="btn btn-success mt-2" onClick={handleCheckout}>Checkout</button>
               </div>
             </div>

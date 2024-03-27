@@ -20,27 +20,35 @@ a {
     color: #000;
 }
 
-.btn{
+.btn {
     padding: .8rem 1rem;
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
 }
 
-.nav-items{
+.nav-items {
     margin-left: auto;
     display: flex;
 }
-.nav-items button{
+
+.nav-items button {
     font-weight: bolder;
     border: none;
     font-size: 1rem;
 
 }
+
 .nav-items button:hover {
     border: none;
 }
-.nav-items i{
+
+.nav-items i {
     margin-right: 1rem;
     font-size: 3rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
 }

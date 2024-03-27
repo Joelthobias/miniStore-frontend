@@ -38,10 +38,7 @@ const Dashboard = () => {
 
     const removeFromCart = async (userId, productId) => {
         try {
-            await axios.get(`http://localhost:4040/remove-from-cart/`,{
-                userId: userId,
-                productId: productId,
-            });
+            await axios.get(`http://localhost:4040/remove-from-cart/?userId=${userId}&productId=${productId}`);
             updateProductInCart(productId, false);
         } catch (error) {
             console.error('Error removing item from cart:', error);
@@ -52,29 +49,31 @@ const Dashboard = () => {
     const updateProductInCart = (productId, inCart) => {
         setProducts(prevProducts => {
             return prevProducts.map(product => {
-                if (product.productID === productId) {
-                    return { ...product, inCart };
+                if (product._id === productId) {
+                    return { ...product, inCart }; // Updating inCart property
                 }
                 return product;
             });
         });
     };
 
+
     return (
         <div className='container row'>
             {products && products.length > 0 ? (
                 products.map(product => (
-                    <div className="card col-md-3 p-5 mx-5" key={product.productID}>
+                    <div className="card col-md-3 p-4 mx-5" key={product.productID}>
                         <img crossOrigin='anonymous' src={`http://localhost:4040${product.img}`} className="card-img-top" alt="..." />
                         <div className="card-body">
                             <h5 className="card-title">{product.title}</h5>
                             <p className="card-text fs-5">{product.price} <i className="fa-solid fa-indian-rupee-sign"></i></p>
-                            {product.inCart ? (
-                                <button className="btn btn-danger" onClick={() => removeFromCart(product.productID, userID)}>Remove from Cart</button>
-                            ) : (
-                                <button className="btn btn-primary" onClick={() => addToCart(product.productID,userID)}>Add to Cart</button>
-                            )}
                         </div>
+                        {product.inCart ? (
+                            <button className="btn btn-warning" onClick={() => removeFromCart(userID, product._id)}>Remove from Cart</button>
+                        ) : (
+                            <button className="btn btn-dark" onClick={() => addToCart(product._id, userID)}>Add to Cart</button>
+                        )}
+
                     </div>
                 ))
             ) : "No products found"}
