@@ -38,7 +38,7 @@ const EditProduct = () => {
         try {
             await axios.put(`${port}/admin/update-product/${productID}`, product);
             alert('Product updated successfully!');
-            window.location.href = "/admin"
+            window.location.href = "/miniStore-frontend/admin"
             // Redirect or navigate to product details page
         } catch (error) {
             console.error('Error updating product:', error);
@@ -49,7 +49,7 @@ const EditProduct = () => {
         try {
             await axios.delete(`${port}/admin/delete-product/${productID}`);
             alert('Product deleted successfully!');
-            window.location.href = "/admin"
+            window.location.href = "/miniStore-frontend/admin"
             // Redirect or navigate to product list page
         } catch (error) {
             console.error('Error deleting product:', error);

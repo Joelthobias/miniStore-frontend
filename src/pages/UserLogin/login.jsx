@@ -26,7 +26,7 @@ const Login = () => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', response.data.user.name);
             localStorage.setItem('userID', response.data.user._id);
-            window.location.href = '/'
+            window.location.href = '/miniStore-frontend/'
 
             // Redirect the user to the dashboard or homepage
             
@@ -53,7 +53,7 @@ const Login = () => {
                         </div>
                         <button type="submit" className="btn btn-primary">Login</button>
                     </form>
-                    <p className="mt-3">Don't have an account? <Link to="/signup">Sign up</Link></p>
+                    <p className="mt-3">Don't have an account? <Link to="/miniStore-frontend/signup">Sign up</Link></p>
                 </div>
             </div>
         </div>

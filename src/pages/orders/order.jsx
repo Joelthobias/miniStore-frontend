@@ -80,7 +80,7 @@ const Order = () => {
             )}
             <div className="container ">
 
-                <button className="px-5 ms-auto btn btn-outline-dark" onClick={() => { window.location.href = "/" }}>Continue Shopping</button>
+                <button className="px-5 ms-auto btn btn-outline-dark" onClick={() => { window.location.href = "/miniStore-frontend/" }}>Continue Shopping</button>
             </div>
 
         </div>

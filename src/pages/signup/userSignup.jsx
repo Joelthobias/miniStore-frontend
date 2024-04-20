@@ -30,7 +30,7 @@ const Signup = () => {
             localStorage.setItem('user', response.data.user.name);
             localStorage.setItem('userID', response.data.user._id);
 
-            window.location.href='/'
+            window.location.href='/miniStore-frontend/'
             // Redirect the user to the dashboard or homepage
         } catch (error) {
             console.error('Signup error:', error.response.data);

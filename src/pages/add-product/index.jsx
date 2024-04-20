@@ -19,7 +19,7 @@ const AddProduct = () => {
             const response = await axios.post(`${port}/admin/add-product`, formData);
             console.log('Server response:', response.data);
             // Redirect to /admin after successful submission
-            window.location.href='/admin'
+            window.location.href='/miniStore-frontend/admin'
         } catch (error) {
             console.error('Error:', error);
         }

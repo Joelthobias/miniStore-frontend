@@ -55,16 +55,16 @@ const AdminDashboard = () => {
           </table>
         </div>
         <div className="col-3 ms-auto list-group">
-          <Link to="/admin/products" className="active list-group-item list-group-item-action">
+          <Link to="/miniStore-frontend/admin/products" className="active list-group-item list-group-item-action">
             Manage Products
           </Link>
-          <Link to="/admin/orders" className="list-group-item list-group-item-action">
+          <Link to="/miniStore-frontend/admin/orders" className="list-group-item list-group-item-action">
             View Orders
           </Link>
-          <Link to="/admin/add-product" className="list-group-item list-group-item-action">
+          <Link to="/miniStore-frontend/admin/add-product" className="list-group-item list-group-item-action">
             Add Product
           </Link>
-          <Link to="/admin/edit-product" className="list-group-item list-group-item-action">
+          <Link to="/miniStore-frontend/admin/edit-product" className="list-group-item list-group-item-action">
             Edit Product
           </Link>
         </div>

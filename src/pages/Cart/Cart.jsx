@@ -42,7 +42,7 @@ const Cart = () => {
       const userID = localStorage.getItem('userID');
       await axios.post(`${port}/create-order`, { userId: userID });
       alert('Order completed successfully!');
-      window.location.href='/orders'
+      window.location.href='/miniStore-frontend/orders'
       // Optionally, you can redirect the user to a confirmation page or clear the cart state
     } catch (error) {
       console.error('Error completing order:', error);
@@ -103,7 +103,7 @@ const Cart = () => {
                 <h5 className="card-title">Cart Summary</h5>
                 <p className='ps-3 mt-3'>Total Quantity: {cart.totalQuantity}</p>
                 <p className='ps-3'>Total Price: {cart.totalPrice} &#36;</p>
-                <button className="btn btn-outline-dark" onClick={() => { window.location.href = "/" }}>Continue Shopping</button>
+                <button className="btn btn-outline-dark" onClick={() => { window.location.href = "/miniStore-frontend/" }}>Continue Shopping</button>
                 <button className="btn btn-success mt-2" onClick={handleCheckout}>Checkout</button>
               </div>
             </div>

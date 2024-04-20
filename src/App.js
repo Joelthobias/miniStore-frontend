@@ -16,9 +16,9 @@ import Signup from './pages/signup/userSignup';
 import Order from './pages/orders/order';
 
 function App() {
-  const isAdminRoute = window.location.pathname.startsWith('/admin');
-  const isLoginPage = window.location.pathname === '/login'; // Check if current route is login page
-  const isSignupPage = window.location.pathname === '/signup'; // Check if current route is signup page
+  const isAdminRoute = window.location.pathname.startsWith('/miniStore-frontend/admin');
+  const isLoginPage = window.location.pathname === '/miniStore-frontend/login'; // Check if current route is login page
+  const isSignupPage = window.location.pathname === '/miniStore-frontend/signup'; // Check if current route is signup page
 
   return (
     <Router>
@@ -27,14 +27,14 @@ function App() {
         {!isAdminRoute && !isLoginPage && !isSignupPage && <NavBar />}
         {isAdminRoute && <NavAdmin />}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Order />} />
-          <Route path="/admin" element={<AdminDash />} />
-          <Route path="/admin/add-product" element={<AddProduct />} />
-          <Route path="/admin/editProduct/:productID" element={<EditProduct />} />
+          <Route path="/miniStore-frontend/" element={<Home />} />
+          <Route path="/miniStore-frontend/login" element={<Login />} />
+          <Route path="/miniStore-frontend/signup" element={<Signup />} />
+          <Route path="/miniStore-frontend/cart" element={<Cart />} />
+          <Route path="/miniStore-frontend/orders" element={<Order />} />
+          <Route path="/miniStore-frontend/admin" element={<AdminDash />} />
+          <Route path="/miniStore-frontend/admin/add-product" element={<AddProduct />} />
+          <Route path="/miniStore-frontend/admin/editProduct/:productID" element={<EditProduct />} />
         </Routes>
       </div>
     </Router>
