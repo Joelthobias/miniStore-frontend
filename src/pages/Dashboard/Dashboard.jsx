@@ -6,7 +6,7 @@ import { port } from '../../Components/port';
 const Dashboard = () => {
     const [products, setProducts] = useState([]);
     const userID=localStorage.getItem('userID')
-    console.log(userID);
+    console.log("userID");
     useEffect(() => {
         fetchProducts();
     }, []);
@@ -28,6 +28,7 @@ const Dashboard = () => {
             productId: productId,
             quantity: 1
         });
+        console.log(response);
         // Assuming the response contains updated cart information
         console.log('Cart updated:', response.data);
         // Call function to update UI or state to reflect the change
@@ -61,6 +62,7 @@ const Dashboard = () => {
 
     return (
         <div className='container row'>
+        
             {products && products.length > 0 ? (
                 products.map(product => (
                     <div className="card col-md-3 p-4 mx-5" key={product.productID}>
