@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { port } from '../../Components/port';
 
 const EditProduct = () => {
     const { productID } = useParams(); // Get the product productID from the URL params
@@ -13,7 +14,7 @@ const EditProduct = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:4040/admin/product/${productID}`);
+                const response = await axios.get(`${port}/admin/product/${productID}`);
                 console.log(response.data);
                 setProduct(response.data.product); // Assuming the response data contains product information
             } catch (error) {
@@ -35,7 +36,7 @@ const EditProduct = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:4040/admin/update-product/${productID}`, product);
+            await axios.put(`${port}/admin/update-product/${productID}`, product);
             alert('Product updated successfully!');
             window.location.href = "/admin"
             // Redirect or navigate to product details page
@@ -46,7 +47,7 @@ const EditProduct = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:4040/admin/delete-product/${productID}`);
+            await axios.delete(`${port}/admin/delete-product/${productID}`);
             alert('Product deleted successfully!');
             window.location.href = "/admin"
             // Redirect or navigate to product list page

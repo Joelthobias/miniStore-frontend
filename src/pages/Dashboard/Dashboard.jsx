@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import axios from 'axios';
+import { port } from '../../Components/port';
 
 const Dashboard = () => {
     const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const Dashboard = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('http://localhost:4040');
+            const response = await axios.get(`${port}`);
             setProducts(response.data.products);
         } catch (error) {
             console.error('Error fetching products:', error);
@@ -22,7 +23,7 @@ const Dashboard = () => {
     const addToCart = async (productId, userId, quantity) => {
     try {
         // Send userId, productId, and quantity in the request body
-        const response = await axios.post(`http://localhost:4040/add-to-cart`, {
+        const response = await axios.post(`${port}/add-to-cart`, {
             userId: userId,
             productId: productId,
             quantity: 1
@@ -38,7 +39,7 @@ const Dashboard = () => {
 
     const removeFromCart = async (userId, productId) => {
         try {
-            await axios.get(`http://localhost:4040/remove-from-cart/?userId=${userId}&productId=${productId}`);
+            await axios.get(`${port}/remove-from-cart/?userId=${userId}&productId=${productId}`);
             updateProductInCart(productId, false);
         } catch (error) {
             console.error('Error removing item from cart:', error);
@@ -63,7 +64,7 @@ const Dashboard = () => {
             {products && products.length > 0 ? (
                 products.map(product => (
                     <div className="card col-md-3 p-4 mx-5" key={product.productID}>
-                        <img crossOrigin='anonymous' src={`http://localhost:4040${product.img}`} className="card-img-top" alt="..." />
+                        <img crossOrigin='anonymous' src={`${port}${product.img}`} className="card-img-top" alt="..." />
                         <div className="card-body">
                             <h5 className="card-title">{product.title}</h5>
                             <p className="card-text fs-5">{product.price} <i className="fa-solid fa-indian-rupee-sign"></i></p>

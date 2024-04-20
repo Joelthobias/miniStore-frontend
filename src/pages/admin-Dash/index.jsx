@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { port } from '../../Components/port';
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -8,7 +9,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4040/admin');
+        const response = await axios.get(`${port}/admin`);
         console.log(response.data);
         setProducts(response.data.products); // Assuming the response data has a 'products' key containing an array of products
       } catch (error) {
@@ -46,7 +47,7 @@ const AdminDashboard = () => {
                   <td>{product.title}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
-                  <td><img crossOrigin='anonymous' src={`http://localhost:4040${product.img}`} alt={product.title} style={{ width: '50px', height: '50px' }} /></td>
+                  <td><img crossOrigin='anonymous' src={`${port}${product.img}`} alt={product.title} style={{ width: '50px', height: '50px' }} /></td>
                   <td><i className="fa-solid fa-pen-to-square" onClick={() => handleEditProduct(product.productID)}></i></td>
                 </tr>
               ))}

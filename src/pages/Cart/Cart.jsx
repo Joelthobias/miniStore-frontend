@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.css'; // Import your CSS file
 import axios from 'axios';
+import { port } from '../../Components/port';
 
 const Cart = () => {
   const [cart, setCart] = useState({});
@@ -11,7 +12,7 @@ const Cart = () => {
       try {
         const userID = localStorage.getItem('userID');
 
-        const response = await axios.get(`http://localhost:4040/cart`, {
+        const response = await axios.get(`${port}/cart`, {
           params: {
             userId: userID
           }
@@ -39,7 +40,7 @@ const Cart = () => {
   const handleCheckout = async () => {
     try {
       const userID = localStorage.getItem('userID');
-      await axios.post(`http://localhost:4040/create-order`, { userId: userID });
+      await axios.post(`${port}/create-order`, { userId: userID });
       alert('Order completed successfully!');
       window.location.href='/orders'
       // Optionally, you can redirect the user to a confirmation page or clear the cart state
@@ -70,7 +71,7 @@ const Cart = () => {
                     <tr key={pds._id}>
                       <td>
                         {pds.product && pds.product.img && (
-                          <img crossOrigin="anonymous" src={`http://localhost:4040${pds.product.img}`} alt={pds.product.title} className="img-fluid p-2" style={{ height: '5rem' }} />
+                          <img crossOrigin="anonymous" src={`${port}${pds.product.img}`} alt={pds.product.title} className="img-fluid p-2" style={{ height: '5rem' }} />
                         )}
                       </td>
                       <td>

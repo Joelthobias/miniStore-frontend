@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { port } from '../../Components/port';
 
 const Order = () => {
     const [orders, setOrders] = useState([]);
@@ -9,7 +10,7 @@ const Order = () => {
             try {
                 const userID = localStorage.getItem('userID');
 
-                const response = await axios.get(`http://localhost:4040/orders`, {
+                const response = await axios.get(`${port}/orders`, {
                     params: {
                         userId: userID
                     }

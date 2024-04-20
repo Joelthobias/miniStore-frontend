@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { port } from '../../Components/port';
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4040/signup', formData);
+            const response = await axios.post(`${port}/signup`, formData);
             console.log('Signup successful:', response.data);
 
             localStorage.setItem('user', response.data.user.name);
